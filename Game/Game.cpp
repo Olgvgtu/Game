@@ -74,26 +74,33 @@ void startUp() {
 
 void layout() {
     for (int i = 0; i < height; i++) {
-        gotoxy(0, i); cout << "#               #";
+        gotoxy(0, i); 
+        cout << "#               #";
         if (i % 2 == 0 && isMoving) {
-            gotoxy(6, i); cout << "|    |";
+            gotoxy(6, i); 
+            cout << "|    |";
         }
         else if (i % 2 != 0 && !isMoving) {
-            gotoxy(6, i); cout << "|    |";
+            gotoxy(6, i); 
+            cout << "|    |";
         }
     }
-    gotoxy(5, 21); cout << "Life : " << life;
-    gotoxy(5, 22); cout << "Score: " << score;
+    gotoxy(5, 21); 
+    cout << "Life : " << life;
+    gotoxy(5, 22); 
+    cout << "Score: " << score;
 }
 void drawMyCar() {
     if (!dead) {
         for (int i = 0; i < 4; i++) {
-            gotoxy(myCarX, myCarY + i); cout << myCar[i];
+            gotoxy(myCarX, myCarY + i); 
+            cout << myCar[i];
         }
     }
     else {
         for (int i = 0; i < 4; i++) {
-            gotoxy(myCarX, myCarY + i); cout << "   ";
+            gotoxy(myCarX, myCarY + i);
+            cout << "   ";
         }
     }
 }
@@ -183,11 +190,13 @@ void died() {
         while (count != 10) {
             input();
             //bomb explosion call
-            gotoxy(2, 22); cout << "You got " << score << " Score!";
+            gotoxy(2, 22); 
+            cout << "You got " << score << " Score!";
             count++;
 
         }
-        gotoxy(2, 22); cout << "                 ";
+        gotoxy(2, 22); 
+        cout << "                 ";
         highestScore[life] = score;
         startUp();
     }
@@ -195,11 +204,13 @@ void died() {
 
 void transition() {
     for (int i = 19; i >= 0; i--) {
-        gotoxy(1, i); cout << "#################";
+        gotoxy(1, i); 
+        cout << "#################";
         Sleep(15);
     }
     for (int i = 1; i < 20; i++) {
-        gotoxy(1, i); cout << "                 ";
+        gotoxy(1, i); 
+        cout << "                 ";
         Sleep(15);
     }
 }
@@ -237,11 +248,65 @@ void game_Over() {
         } while (getch() != 'x');
         exit(1);
     }
-}
 
+    void spiralEffect() {
+        int row = 1, col = 1;
+        int last_row = height - 2, last_col = width - 2;
 
+        while (row <= last_row && col <= last_col) {
+            for (int i = col; i <= last_col; i++) {
+                gotoxy(i, row);
+                cout << "#";
+                sleep(2);
+            } row++;
 
+            for (int i = row; i <= last_row; i++) {
+                gotoxy(last_col, i);
+                cout << "#";
+            }last_col--;
 
+            if (row <= last_row) {
+                for (int i = last_col; i >= col; i--) {
+                    gotoxy(i, last_row);
+                    cout << "#";
+                    Sleep(1);
+                }last_row--;
+            }
+            if (col <= last_col) {
+                for (int i = last_row; i >= row; i--) {
+                    gotoxy(col, i);
+                    cout << "#";
+                } col++;
+            }
+        }
 
+        row = 1, col = 1;
+        last_row = height - 2, last_col = width - 2;
 
+        while (row <= last_row && col <= last_col) {
+            for (int i = col; i <= last_col; i++) {
+                gotoxy(i, row);
+                cout << " ";
+                sleep(2);
+            } row++;
 
+            for (int i = row; i <= last_row; i++) {
+                gotoxy(last_col, i);
+                cout << " ";
+            }last_col--;
+
+            if (row <= last_row) {
+                for (int i = last_col; i >= col; i--) {
+                    gotoxy(i, last_row);
+                    cout << " ";
+                    Sleep(1);
+                }last_row--;
+            }
+            if (col <= last_col) {
+                for (int i = last_row; i >= row; i--) {
+                    gotoxy(col, i);
+                    cout << " ";
+                } col++;
+            }
+        }
+    }
