@@ -1,5 +1,5 @@
 #include <iostream>
-#include <windows.h>
+#include <Windows.h>
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
@@ -245,19 +245,21 @@ void game_Over() {
             gotoxy(0, 19); cout << "#################";
             gotoxy(0, 20); cout << "                 ";
             gotoxy(0, 21); cout << "                 ";
-        } while (getch() != 'x');
+        } while (_getch() != 'x');
         exit(1);
     }
+}
 
     void spiralEffect() {
         int row = 1, col = 1;
-        int last_row = height - 2, last_col = width - 2;
+        int last_row = height - 2;
+        int last_col = width - 2;
 
         while (row <= last_row && col <= last_col) {
             for (int i = col; i <= last_col; i++) {
                 gotoxy(i, row);
                 cout << "#";
-                sleep(2);
+                Sleep(2);
             } row++;
 
             for (int i = row; i <= last_row; i++) {
@@ -287,7 +289,7 @@ void game_Over() {
             for (int i = col; i <= last_col; i++) {
                 gotoxy(i, row);
                 cout << " ";
-                sleep(2);
+                Sleep(2);
             } row++;
 
             for (int i = row; i <= last_row; i++) {
@@ -310,3 +312,69 @@ void game_Over() {
             }
         }
     }
+    void splashScreen() {
+            gotoxy(0, 1); cout << "#################";
+            gotoxy(0, 2); cout << "#               #";
+            gotoxy(0, 3); cout << "#               #";
+            gotoxy(0, 4); cout << "#               #";
+            gotoxy(0, 5); cout << "#               #";
+            gotoxy(0, 6); cout << "#               #";
+            gotoxy(0, 7); cout << "#               #";
+            gotoxy(0, 8); cout << "#               #";
+            gotoxy(0, 9); cout << "#               #";
+            gotoxy(0, 10); cout << "#               #";
+            gotoxy(0, 11); cout << "#               #";
+            gotoxy(0, 12); cout << "#               #";
+            gotoxy(0, 13); cout << "#               #";
+            gotoxy(0, 15); cout << "#               #";
+            gotoxy(0, 15); cout << "#               #";
+            gotoxy(0, 16); cout << "#               #";
+            gotoxy(0, 17); cout << "#               #";
+            gotoxy(0, 18); cout << "#               #";
+            gotoxy(0, 19); cout << "#################";
+            Sleep(500);
+    }
+
+void games() {
+    do {
+        gotoxy(0, 1); cout << "#################";
+        gotoxy(0, 2); cout << "#               #";
+        gotoxy(0, 3); cout << "#               #";
+        gotoxy(0, 4); cout << "#  RACE CAR!!!  #";
+        gotoxy(0, 5); cout << "#               #";
+        gotoxy(0, 6); cout << "#               #";
+        gotoxy(0, 7); cout << "#               #";
+        gotoxy(0, 8); cout << "#               #";
+        gotoxy(0, 9); cout << "#               #";
+        gotoxy(0, 10); cout << "#               #";
+        gotoxy(0, 11); cout << "#               #";
+        gotoxy(0, 12); cout << "#               #";
+        gotoxy(0, 13); cout << "#               #";
+        gotoxy(0, 15); cout << "#               #";
+        gotoxy(0, 15); cout << "# PRESS 'SPACE' #";
+        gotoxy(0, 16); cout << "#    TO START   #";
+        gotoxy(0, 17); cout << "#               #";
+        gotoxy(0, 18); cout << "#               #";
+        gotoxy(0, 19); cout << "#################";
+    } while (_getch() != 32);
+}
+
+int main() {
+    hideCursor();
+    startUp();
+    splashScreen();
+    spiralEffect();
+    transition();
+    games();
+    while (!dead) {
+        layout();
+        input();
+        rules_logic();
+        drawMyCar();
+        drawEnemyCar();
+        died();
+        game_Over();
+        Sleep(500);
+    }
+}
+
