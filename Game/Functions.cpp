@@ -15,17 +15,17 @@ bool bombExplode;
 const int height = 20;
 const int width = 19;
 int life = 3;
-int speed;
+const int speed = 2;
 int score;
 int myCarX;
 int myCarY;
-int highScore;
-int highestScore[5];
+int highScore = 0;
+int highestScore[3];
 int enemyX[4];
 int enemyY[4] = { -8, -18, -28, -38 };
 int enemyPositionX;
 int enemyPositionY;
-int enemyNum;
+const int enemyNum = 4;
 
 string bombParticle1[4] = { "o   o"," ooo "," ooo " ,"o   o" };
 
@@ -82,8 +82,6 @@ void startUp(bool &dead) {
     dead = false;
     myCarX = 8;
     myCarY = 16;
-    speed = 1;
-    enemyNum = 4;
     score = 0;
     for (int i = 0; i < enemyNum; i++) {
         enemyPositionX = rand() % 3;
@@ -242,17 +240,17 @@ void game_Over() {
     if (life == 0) {
         gameOver = true;
         do {
-            gotoxy(0, 0); cout << "###################";
-            gotoxy(0, 1); cout << "#                 #";
-            gotoxy(0, 2); cout << "#                 #";
-            gotoxy(0, 3); cout << "#                 #";
-            gotoxy(0, 4); cout << "#                 #";
-            gotoxy(0, 5); cout << "#   GAME OVER!!   #";
-            gotoxy(0, 6); cout << "#                 #";
-            gotoxy(0, 7); cout << "#    HIGHSCORE    #";
-            gotoxy(0, 8); cout << "#                 #";
-            gotoxy(0, 9); cout << "#                 #";
-            gotoxy(0, 10); cout << "#       " << highScore << "          #";
+            gotoxy(0, 0); cout <<  "###################";
+            gotoxy(0, 1); cout <<  "#                 #";
+            gotoxy(0, 2); cout <<  "#                 #";
+            gotoxy(0, 3); cout <<  "#                 #";
+            gotoxy(0, 4); cout <<  "#                 #";
+            gotoxy(0, 5); cout <<  "#   GAME OVER!!   #";
+            gotoxy(0, 6); cout <<  "#                 #";
+            gotoxy(0, 7); cout <<  "#    HIGHSCORE    #";
+            gotoxy(0, 8); cout <<  "#                 #";
+            gotoxy(0, 9); cout <<  "#                 #";
+            gotoxy(0, 10); cout << "#       " << highScore << "         #";
             gotoxy(0, 11); cout << "#                 #";
             gotoxy(0, 12); cout << "#                 #";
             gotoxy(0, 13); cout << "#                 #";
@@ -332,16 +330,16 @@ void spiralEffect() {
     }
 }
 void splashScreen() {
-    gotoxy(0, 0); cout << "###################";
-    gotoxy(0, 1); cout << "#                 # ";
-    gotoxy(0, 2); cout << "#                 #  ";
-    gotoxy(0, 3); cout << "#                 #  ";
-    gotoxy(0, 4); cout << "#                 #  ";
-    gotoxy(0, 5); cout << "#                 #  ";
-    gotoxy(0, 6); cout << "#                 #  ";
-    gotoxy(0, 7); cout << "#                 #  ";
-    gotoxy(0, 8); cout << "#                 #  ";
-    gotoxy(0, 9); cout << "#                 #  ";
+    gotoxy(0, 0); cout <<  "###################";
+    gotoxy(0, 1); cout <<  "#                 # ";
+    gotoxy(0, 2); cout <<  "#                 #  ";
+    gotoxy(0, 3); cout <<  "#                 #  ";
+    gotoxy(0, 4); cout <<  "#                 #  ";
+    gotoxy(0, 5); cout <<  "#                 #  ";
+    gotoxy(0, 6); cout <<  "#                 #  ";
+    gotoxy(0, 7); cout <<  "#                 #  ";
+    gotoxy(0, 8); cout <<  "#                 #  ";
+    gotoxy(0, 9); cout <<  "#                 #  ";
     gotoxy(0, 10); cout << "#                 #  ";
     gotoxy(0, 11); cout << "#                 #  ";
     gotoxy(0, 12); cout << "#                 #  ";
@@ -357,16 +355,16 @@ void splashScreen() {
 
 void games() {
     do {
-        gotoxy(0, 0); cout << "###################";
-        gotoxy(0, 1); cout << "#                 #";
-        gotoxy(0, 2); cout << "#                 #";
-        gotoxy(0, 3); cout << "#                 #";
-        gotoxy(0, 4); cout << "#   RACE CAR!!!   #";
-        gotoxy(0, 5); cout << "#                 #";
-        gotoxy(0, 6); cout << "#                 #";
-        gotoxy(0, 7); cout << "#                 #";
-        gotoxy(0, 8); cout << "#                 #";
-        gotoxy(0, 9); cout << "#                 #";
+        gotoxy(0, 0); cout <<  "###################";
+        gotoxy(0, 1); cout <<  "#                 #";
+        gotoxy(0, 2); cout <<  "#                 #";
+        gotoxy(0, 3); cout <<  "#                 #";
+        gotoxy(0, 4); cout <<  "#   RACE CAR!!!   #";
+        gotoxy(0, 5); cout <<  "#                 #";
+        gotoxy(0, 6); cout <<  "#                 #";
+        gotoxy(0, 7); cout <<  "#                 #";
+        gotoxy(0, 8); cout <<  "#                 #";
+        gotoxy(0, 9); cout <<  "#                 #";
         gotoxy(0, 10); cout << "#                 #";
         gotoxy(0, 11); cout << "#                 #";
         gotoxy(0, 12); cout << "#                 #";
