@@ -76,23 +76,23 @@ void layout() {
     for (int i = 0; i < height; i++) {
         gotoxy(0, i); cout << "#                 #";
         if (i % 2 == 0 && isMoving) {
-            gotoxy(6, i); 
+            gotoxy(6, i);
             cout << "|    |";
         }
         else if (i % 2 != 0 && !isMoving) {
-            gotoxy(6, i); 
+            gotoxy(6, i);
             cout << "|    |";
         }
     }
-    gotoxy(5, 21); 
+    gotoxy(5, 21);
     cout << "Life : " << life;
-    gotoxy(5, 22); 
+    gotoxy(5, 22);
     cout << "Score: " << score;
 }
 void drawMyCar() {
     if (!dead) {
         for (int i = 0; i < 4; i++) {
-            gotoxy(myCarX, myCarY + i); 
+            gotoxy(myCarX, myCarY + i);
             cout << myCar[i];
         }
     }
@@ -104,7 +104,7 @@ void drawMyCar() {
     }
 }
 
-void drawEnemyCar() { 
+void drawEnemyCar() {
     for (int i = 0; i < enemyNum; i++) {
         if (enemyY[i] + 3 > 0) {
             gotoxy(enemyX[i], enemyY[i] + 3);
@@ -185,10 +185,10 @@ void BombExplosion() {
         for (int i = 0; i < 4; i++) {
             gotoxy(myCarX - 1, myCarY - 1 + i);
             cout << bombParticle1[i] << endl;
-        
+
         }
         bombExplode = false;
-        
+
     }
     else {
         for (int i = 0; i < 4; i++) {
@@ -197,7 +197,7 @@ void BombExplosion() {
 
         }
         bombExplode = true;
-    
+
     }
     Sleep(100);
 }
@@ -209,7 +209,7 @@ void died() {
         while (count != 10) {
             input();
             BombExplosion();
-            gotoxy(2, 22); 
+            gotoxy(2, 22);
             cout << "You got " << score << " Score!";
             count++;
 
@@ -228,7 +228,7 @@ void transition() {
         Sleep(15);
     }
     for (int i = 1; i < 20; i++) {
-        gotoxy(1, i); 
+        gotoxy(1, i);
         cout << "                 ";
         Sleep(15);
     }
@@ -243,16 +243,16 @@ void game_Over() {
     if (life == 0) {
         gameOver = true;
         do {
-            gotoxy(0, 0); cout <<  "###################";
-            gotoxy(0, 1); cout <<  "#                 #";
-            gotoxy(0, 2); cout <<  "#                 #";
-            gotoxy(0, 3); cout <<  "#                 #";
-            gotoxy(0, 4); cout <<  "#                 #";
-            gotoxy(0, 5); cout <<  "#   GAME OVER!!   #";
-            gotoxy(0, 6); cout <<  "#                 #";
-            gotoxy(0, 7); cout <<  "#    HIGHSCORE    #";
-            gotoxy(0, 8); cout <<  "#                 #";
-            gotoxy(0, 9); cout <<  "#                 #";
+            gotoxy(0, 0); cout << "###################";
+            gotoxy(0, 1); cout << "#                 #";
+            gotoxy(0, 2); cout << "#                 #";
+            gotoxy(0, 3); cout << "#                 #";
+            gotoxy(0, 4); cout << "#                 #";
+            gotoxy(0, 5); cout << "#   GAME OVER!!   #";
+            gotoxy(0, 6); cout << "#                 #";
+            gotoxy(0, 7); cout << "#    HIGHSCORE    #";
+            gotoxy(0, 8); cout << "#                 #";
+            gotoxy(0, 9); cout << "#                 #";
             gotoxy(0, 10); cout << "#       " << highScore << "          #";
             gotoxy(0, 11); cout << "#                 #";
             gotoxy(0, 12); cout << "#                 #";
@@ -270,104 +270,104 @@ void game_Over() {
     }
 }
 
-    void spiralEffect() {
-        int row = 1, col = 1;
-        int last_row = height - 2;
-        int last_col = width - 2;
+void spiralEffect() {
+    int row = 1, col = 1;
+    int last_row = height - 2;
+    int last_col = width - 2;
 
-        while (row <= last_row && col <= last_col) {
-            for (int i = col; i <= last_col; i++) {
-                gotoxy(i, row);
+    while (row <= last_row && col <= last_col) {
+        for (int i = col; i <= last_col; i++) {
+            gotoxy(i, row);
+            cout << "#";
+            Sleep(2);
+        } row++;
+
+        for (int i = row; i <= last_row; i++) {
+            gotoxy(last_col, i);
+            cout << "#";
+        }last_col--;
+
+        if (row <= last_row) {
+            for (int i = last_col; i >= col; i--) {
+                gotoxy(i, last_row);
                 cout << "#";
-                Sleep(2);
-            } row++;
-
-            for (int i = row; i <= last_row; i++) {
-                gotoxy(last_col, i);
-                cout << "#";
-            }last_col--;
-
-            if (row <= last_row) {
-                for (int i = last_col; i >= col; i--) {
-                    gotoxy(i, last_row);
-                    cout << "#";
-                    Sleep(1);
-                }last_row--;
-            }
-            if (col <= last_col) {
-                for (int i = last_row; i >= row; i--) {
-                    gotoxy(col, i);
-                    cout << "#";
-                } col++;
-            }
+                Sleep(1);
+            }last_row--;
         }
-
-        row = 1, col = 1;
-        last_row = height - 2, last_col = width - 2;
-
-        while (row <= last_row && col <= last_col) {
-            for (int i = col; i <= last_col; i++) {
-                gotoxy(i, row);
-                cout << " ";
-                Sleep(2);
-            } row++;
-
-            for (int i = row; i <= last_row; i++) {
-                gotoxy(last_col, i);
-                cout << " ";
-            }last_col--;
-
-            if (row <= last_row) {
-                for (int i = last_col; i >= col; i--) {
-                    gotoxy(i, last_row);
-                    cout << " ";
-                    Sleep(1);
-                }last_row--;
-            }
-            if (col <= last_col) {
-                for (int i = last_row; i >= row; i--) {
-                    gotoxy(col, i);
-                    cout << " ";
-                } col++;
-            }
+        if (col <= last_col) {
+            for (int i = last_row; i >= row; i--) {
+                gotoxy(col, i);
+                cout << "#";
+            } col++;
         }
     }
-    void splashScreen() {
-            gotoxy(0, 0); cout <<  "###################";
-            gotoxy(0, 1); cout <<  "#                 # ";
-            gotoxy(0, 2); cout <<  "#                 #  ";
-            gotoxy(0, 3); cout <<  "#                 #  ";
-            gotoxy(0, 4); cout <<  "#                 #  ";
-            gotoxy(0, 5); cout <<  "#                 #  ";
-            gotoxy(0, 6); cout <<  "#                 #  ";
-            gotoxy(0, 7); cout <<  "#                 #  ";
-            gotoxy(0, 8); cout <<  "#                 #  ";
-            gotoxy(0, 9); cout <<  "#                 #  ";
-            gotoxy(0, 10); cout << "#                 #  ";
-            gotoxy(0, 11); cout << "#                 #  ";
-            gotoxy(0, 12); cout << "#                 #  ";
-            gotoxy(0, 13); cout << "#                 #  ";
-            gotoxy(0, 14); cout << "#                 #  ";
-            gotoxy(0, 15); cout << "#                 #  ";
-            gotoxy(0, 16); cout << "#                 #  ";
-            gotoxy(0, 17); cout << "#                 #  ";
-            gotoxy(0, 18); cout << "#                 #  ";
-            gotoxy(0, 19); cout << "###################  ";
-            Sleep(500);
+
+    row = 1, col = 1;
+    last_row = height - 2, last_col = width - 2;
+
+    while (row <= last_row && col <= last_col) {
+        for (int i = col; i <= last_col; i++) {
+            gotoxy(i, row);
+            cout << " ";
+            Sleep(2);
+        } row++;
+
+        for (int i = row; i <= last_row; i++) {
+            gotoxy(last_col, i);
+            cout << " ";
+        }last_col--;
+
+        if (row <= last_row) {
+            for (int i = last_col; i >= col; i--) {
+                gotoxy(i, last_row);
+                cout << " ";
+                Sleep(1);
+            }last_row--;
+        }
+        if (col <= last_col) {
+            for (int i = last_row; i >= row; i--) {
+                gotoxy(col, i);
+                cout << " ";
+            } col++;
+        }
     }
+}
+void splashScreen() {
+    gotoxy(0, 0); cout << "###################";
+    gotoxy(0, 1); cout << "#                 # ";
+    gotoxy(0, 2); cout << "#                 #  ";
+    gotoxy(0, 3); cout << "#                 #  ";
+    gotoxy(0, 4); cout << "#                 #  ";
+    gotoxy(0, 5); cout << "#                 #  ";
+    gotoxy(0, 6); cout << "#                 #  ";
+    gotoxy(0, 7); cout << "#                 #  ";
+    gotoxy(0, 8); cout << "#                 #  ";
+    gotoxy(0, 9); cout << "#                 #  ";
+    gotoxy(0, 10); cout << "#                 #  ";
+    gotoxy(0, 11); cout << "#                 #  ";
+    gotoxy(0, 12); cout << "#                 #  ";
+    gotoxy(0, 13); cout << "#                 #  ";
+    gotoxy(0, 14); cout << "#                 #  ";
+    gotoxy(0, 15); cout << "#                 #  ";
+    gotoxy(0, 16); cout << "#                 #  ";
+    gotoxy(0, 17); cout << "#                 #  ";
+    gotoxy(0, 18); cout << "#                 #  ";
+    gotoxy(0, 19); cout << "###################  ";
+    Sleep(500);
+}
 
 void games() {
     do {
-        gotoxy(0, 0); cout <<  "###################";
-        gotoxy(0, 1); cout <<  "#                 #";
-        gotoxy(0, 2); cout <<  "#                 #";
-        gotoxy(0, 3); cout <<  "#                 #";
-        gotoxy(0, 4); cout <<  "#   RACE CAR!!!   #";
-        gotoxy(0, 5); cout <<  "#                 #";
-        gotoxy(0, 6); cout <<  "#                 #";
-        gotoxy(0, 7); cout <<  "#                 #";
-        gotoxy(0, 8); cout <<  "#                 #";
-        gotoxy(0, 9); cout <<  "#                 #";
+        gotoxy(0, 0); cout << "###################";
+        gotoxy(0, 1); cout << "#                 #";
+        gotoxy(0, 2); cout << "#                 #";
+        gotoxy(0, 3); cout << "#                 #";
+        gotoxy(0, 4); cout << "#   RACE CAR!!!   #";
+        gotoxy(0, 5); cout << "#                 #";
+        gotoxy(0, 6); cout << "#                 #";
+        gotoxy(0, 7); cout << "#                 #";
+        gotoxy(0, 8); cout << "#                 #";
+        gotoxy(0, 9); cout << "#                 #";
         gotoxy(0, 10); cout << "#                 #";
         gotoxy(0, 11); cout << "#                 #";
         gotoxy(0, 12); cout << "#                 #";
