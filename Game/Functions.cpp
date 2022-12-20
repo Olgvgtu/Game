@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
+#include <fstream>
 #include <string>
 
 #include "Functions.h"
@@ -20,7 +21,6 @@ int score;
 int myCarX;
 int myCarY;
 int highScore = 0;
-int highestScore[3];
 int enemyX[4];
 int enemyY[4] = { -8, -18, -28, -38 };
 int enemyPositionX;
@@ -199,7 +199,7 @@ void BombExplosion() {
     Sleep(100);
 }
 
-void died(bool &dead) {
+void died(bool &dead, int highestScore[]) {
     if (dead) {
         life--;
         int count = 0;
@@ -231,7 +231,7 @@ void transition() {
     }
 }
 
-void game_Over() {
+void game_Over(int highestScore[3]) {
     for (int i = 0; i < life; i++) {
         if (highestScore[i] >= highestScore[i - 1]) highScore = highestScore[i];
         else if (highestScore[i] <= highestScore[i - 1]) highScore = highestScore[i - 1];
@@ -330,6 +330,8 @@ void spiralEffect() {
     }
 }
 void splashScreen() {
+
+
     gotoxy(0, 0); cout <<  "###################";
     gotoxy(0, 1); cout <<  "#                 # ";
     gotoxy(0, 2); cout <<  "#                 #  ";
