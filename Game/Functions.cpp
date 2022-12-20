@@ -17,8 +17,11 @@ const int height = 20;
 const int width = 19;
 const int speed = 2;
 string gameBoardArray[21];
+string* gameBoard;
 string splashScreenText[21];
+string* screeTextLocation;
 string gameOverScreen[23];
+string* gameOverTextLocation;
 int score;
 int myCarX;
 int myCarY;
@@ -30,9 +33,9 @@ int enemyPositionY;
 const int enemyNum = 4;
 
 string bombParticle1[4] = { "o   o"," ooo "," ooo " ,"o   o" };
-
+string* particle_1_Location;
 string bombParticle2[4] = { " ooo " ,"o   o","o   o"," ooo " };
-
+string* particle_2_Location;
 string myCar[4] = { " # ","# #", " # ", "# #" };
 
 void gotoxy(int x, int y) {
@@ -182,8 +185,9 @@ void input(bool &dead) {
 void BombExplosion() {
     if (bombExplode) {
         for (int i = 0; i < 4; i++) {
+            particle_1_Location = &bombParticle1[i];
             gotoxy(myCarX - 1, myCarY - 1 + i);
-            cout << bombParticle1[i] << endl;
+            cout << *particle_1_Location << endl;
 
         }
         bombExplode = false;
@@ -191,8 +195,9 @@ void BombExplosion() {
     }
     else {
         for (int i = 0; i < 4; i++) {
+            particle_2_Location = &bombParticle2[i];
             gotoxy(myCarX - 1, myCarY - 1 + i);
-            cout << bombParticle2[i] << endl;
+            cout << *particle_2_Location << endl;
 
         }
         bombExplode = true;
@@ -253,7 +258,7 @@ void game_Over(int highestScore[], int life) {
                     gotoxy(0, 10); cout << "#       " << highScore << "         #"; 
                 }
                 else {
-                    string* gameOverTextLocation = &gameOverScreen[i];
+                    gameOverTextLocation = &gameOverScreen[i];
                     gotoxy(0, i); cout << *gameOverTextLocation;
                 }
             }
@@ -332,7 +337,7 @@ void splashScreen() {
         getline(myFile, splashScreenText[i]);
     }
     for (int i = 0; i <= 20; i++) {
-        string* screeTextLocation = &splashScreenText[i];
+        screeTextLocation = &splashScreenText[i];
         gotoxy(0, i); cout << *screeTextLocation;
     }
     myFile.close();
@@ -348,7 +353,7 @@ void games() {
 
     do {
         for (int i = 0; i <= 20; i++) {
-            string* gameBoard = &gameBoardArray[i];
+            gameBoard = &gameBoardArray[i];
             gotoxy(0, i); cout << *gameBoard;
         }
         
