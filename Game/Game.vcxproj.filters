@@ -27,4 +27,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="gameBoard.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="splashScreen.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+    <Text Include="gameOver.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

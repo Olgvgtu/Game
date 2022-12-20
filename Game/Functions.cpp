@@ -15,8 +15,10 @@ bool isMoving;
 bool bombExplode;
 const int height = 20;
 const int width = 19;
-int life = 3;
 const int speed = 2;
+string gameBoardArray[21];
+string splashScreenText[21];
+string gameOverScreen[23];
 int score;
 int myCarX;
 int myCarY;
@@ -96,7 +98,7 @@ void startUp(bool &dead) {
 
 }
 
-void layout() {
+void layout(int life) {
     for (int i = 0; i < height; i++) {
         gotoxy(0, i); cout << "#                 #";
         if (i % 2 == 0 && isMoving) {
@@ -199,7 +201,7 @@ void BombExplosion() {
     Sleep(100);
 }
 
-void died(bool &dead, int highestScore[]) {
+void died(bool &dead, int highestScore[], int &life) {
     if (dead) {
         life--;
         int count = 0;
@@ -231,39 +233,33 @@ void transition() {
     }
 }
 
-void game_Over(int highestScore[3]) {
-    for (int i = 0; i < life; i++) {
-        if (highestScore[i] >= highestScore[i - 1]) highScore = highestScore[i];
-        else if (highestScore[i] <= highestScore[i - 1]) highScore = highestScore[i - 1];
+void game_Over(int highestScore[], int life) {
+    highScore = 0;
+    for (int i = 0; i < 3; i++) {
+        if (highestScore[i] > highScore) highScore = highestScore[i];
     }
 
     if (life == 0) {
+        fstream myFile;
+        myFile.open("gameOver.txt", ios::in);
         gameOver = true;
         do {
-            gotoxy(0, 0); cout <<  "###################";
-            gotoxy(0, 1); cout <<  "#                 #";
-            gotoxy(0, 2); cout <<  "#                 #";
-            gotoxy(0, 3); cout <<  "#                 #";
-            gotoxy(0, 4); cout <<  "#                 #";
-            gotoxy(0, 5); cout <<  "#   GAME OVER!!   #";
-            gotoxy(0, 6); cout <<  "#                 #";
-            gotoxy(0, 7); cout <<  "#    HIGHSCORE    #";
-            gotoxy(0, 8); cout <<  "#                 #";
-            gotoxy(0, 9); cout <<  "#                 #";
-            gotoxy(0, 10); cout << "#       " << highScore << "         #";
-            gotoxy(0, 11); cout << "#                 #";
-            gotoxy(0, 12); cout << "#                 #";
-            gotoxy(0, 13); cout << "#                 #";
-            gotoxy(0, 14); cout << "#                 #";
-            gotoxy(0, 15); cout << "#    Press  'X'   #";
-            gotoxy(0, 16); cout << "#     TO EXIT     #";
-            gotoxy(0, 17); cout << "#                 #";
-            gotoxy(0, 18); cout << "#                 #";
-            gotoxy(0, 19); cout << "###################";
-            gotoxy(0, 20); cout << "                   ";
-            gotoxy(0, 21); cout << "                   ";
+            for (int i = 0; i <= 22; i++) {
+                if (i == 10) {}
+                else getline(myFile, gameOverScreen[i]);
+            }
+            for (int i = 0; i <= 22; i++) {
+                if (i == 10) { 
+                    gotoxy(0, 10); cout << "#       " << highScore << "         #"; 
+                }
+                else {
+                    string* gameOverTextLocation = &gameOverScreen[i];
+                    gotoxy(0, i); cout << *gameOverTextLocation;
+                }
+            }
         } while (_getch() != 'x');
         exit(1);
+        myFile.close();
     }
 }
 
@@ -330,52 +326,32 @@ void spiralEffect() {
     }
 }
 void splashScreen() {
-
-
-    gotoxy(0, 0); cout <<  "###################";
-    gotoxy(0, 1); cout <<  "#                 # ";
-    gotoxy(0, 2); cout <<  "#                 #  ";
-    gotoxy(0, 3); cout <<  "#                 #  ";
-    gotoxy(0, 4); cout <<  "#                 #  ";
-    gotoxy(0, 5); cout <<  "#                 #  ";
-    gotoxy(0, 6); cout <<  "#                 #  ";
-    gotoxy(0, 7); cout <<  "#                 #  ";
-    gotoxy(0, 8); cout <<  "#                 #  ";
-    gotoxy(0, 9); cout <<  "#                 #  ";
-    gotoxy(0, 10); cout << "#                 #  ";
-    gotoxy(0, 11); cout << "#                 #  ";
-    gotoxy(0, 12); cout << "#                 #  ";
-    gotoxy(0, 13); cout << "#                 #  ";
-    gotoxy(0, 14); cout << "#                 #  ";
-    gotoxy(0, 15); cout << "#                 #  ";
-    gotoxy(0, 16); cout << "#                 #  ";
-    gotoxy(0, 17); cout << "#                 #  ";
-    gotoxy(0, 18); cout << "#                 #  ";
-    gotoxy(0, 19); cout << "###################  ";
+    fstream myFile;
+    myFile.open("splashScreen.txt", ios::in);
+    for (int i = 0; i <= 20; i++) {
+        getline(myFile, splashScreenText[i]);
+    }
+    for (int i = 0; i <= 20; i++) {
+        string* screeTextLocation = &splashScreenText[i];
+        gotoxy(0, i); cout << *screeTextLocation;
+    }
+    myFile.close();
     Sleep(500);
 }
 
 void games() {
+    fstream myFile;
+    myFile.open("gameBoard.txt", ios::in);
+    for (int i = 0; i <= 20; i++) {
+        getline(myFile, gameBoardArray[i]);
+    }
+
     do {
-        gotoxy(0, 0); cout <<  "###################";
-        gotoxy(0, 1); cout <<  "#                 #";
-        gotoxy(0, 2); cout <<  "#                 #";
-        gotoxy(0, 3); cout <<  "#                 #";
-        gotoxy(0, 4); cout <<  "#   RACE CAR!!!   #";
-        gotoxy(0, 5); cout <<  "#                 #";
-        gotoxy(0, 6); cout <<  "#                 #";
-        gotoxy(0, 7); cout <<  "#                 #";
-        gotoxy(0, 8); cout <<  "#                 #";
-        gotoxy(0, 9); cout <<  "#                 #";
-        gotoxy(0, 10); cout << "#                 #";
-        gotoxy(0, 11); cout << "#                 #";
-        gotoxy(0, 12); cout << "#                 #";
-        gotoxy(0, 13); cout << "#                 #";
-        gotoxy(0, 14); cout << "#                 #";
-        gotoxy(0, 15); cout << "#  PRESS 'SPACE'  #";
-        gotoxy(0, 16); cout << "#     TO START    #";
-        gotoxy(0, 17); cout << "#                 #";
-        gotoxy(0, 18); cout << "#                 #";
-        gotoxy(0, 19); cout << "###################";
+        for (int i = 0; i <= 20; i++) {
+            string* gameBoard = &gameBoardArray[i];
+            gotoxy(0, i); cout << *gameBoard;
+        }
+        
     } while (_getch() != 32);
+    myFile.close();
 }

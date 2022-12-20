@@ -133,6 +133,11 @@
   <ItemGroup>
     <ClInclude Include="Functions.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="gameBoard.txt" />
+    <Text Include="gameOver.txt" />
+    <Text Include="splashScreen.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

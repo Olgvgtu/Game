@@ -7,6 +7,7 @@
 
 #include "Functions.h"
 bool dead;
+int life = 3;
 int highestScore[3];
 using namespace std;
 
@@ -19,13 +20,13 @@ int main() {
     games();
 
     while (!dead) {
-        layout();
+        layout(life);
         input(dead);
         rules_logic(dead);
         drawMyCar(dead);
         drawEnemyCar();
-        died(dead, highestScore);
-        game_Over(highestScore);
+        died(dead, highestScore, life);
+        game_Over(highestScore, life);
         Sleep(500);
     }
 }
